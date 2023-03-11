@@ -1,0 +1,8 @@
+{
+   "name":"xs-util",
+   "version":"1.0.1",
+   "main":"index.js",
+   "description":"测试utils",
+   "keyword":["xs","utils"],
+   "license": "MIT"
+}
