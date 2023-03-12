@@ -1,18 +1,17 @@
 const express = require('express')
-
+const router = express.Router()
 const app = express()
 
-app.listen('3004',()=>{
-   console.log('启动成功1' >> ', 启动成功'); //xs
+app.use('public', express.static('./index.js'))
+
+router.get('/user/list',(req,res)=>{
+   res.send({name:'list'})
 })
 
-app.get('/user',(req,res)=>{
-   res.send({name:'4444'})
-})
-
-app.post('/user',(req,res)=>{
+router.post('/user/list',(req,res)=>{
    res.send({name:'李四'})
 })
 
-
-app.use('public',express.static('./index.js'))
+module.exports = {
+   router
+}
