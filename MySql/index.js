@@ -8,7 +8,36 @@ const db =  mysql.createPool({
 })
 
 // 执行sql
-db.query('SELECT 1',(err,results)=>{
-   console.log('err :>> ', err); //xs
-   console.log('results :>> ', results); //xs
+const sqlStr = 'select * from users '
+db.query(sqlStr,(err,results)=>{
+
 })
+
+// const users = {
+//    password:'123',
+//    name:'锁阳',
+//    id:6
+// }
+// const insetStr = 'INSERT INTO users (password,name,id) values (?,?,?)'
+// const insetStr = 'INSERT INTO users SET ?'
+// db.query(insetStr, users, (err,results)=>{
+//    if(results?.affectedRows===1){
+//       console.log('成功>> ', '成功'); //xs
+//    }
+// })
+
+
+
+
+// const users1 = {
+//    password:'123',
+//    name:'锁阳33333',
+//    id:6
+// }
+// const insetStr = 'UPDATE USERS SET ? where id=?'
+
+// db.query(insetStr, [users1,6], (err,results)=>{
+//    if(results?.affectedRows===1){
+//       console.log('成功>> ', '成功'); //xs
+//    }
+// })
