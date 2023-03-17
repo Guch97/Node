@@ -41,3 +41,8 @@ db.query(sqlStr,(err,results)=>{
 //       console.log('成功>> ', '成功'); //xs
 //    }
 // })
+
+const insetStr = 'DELETE FROM users where id=?'
+db.query(insetStr,6,(err,data)=>{
+
+})
