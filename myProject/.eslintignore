@@ -1,6 +1,0 @@
-node_modules
-
-!.prettierrc.js
-!.stylelintrc.js
-!.eslintrc.js
-!.cz-config.js

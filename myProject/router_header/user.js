@@ -1,10 +1,6 @@
 const db = require('../db/index')
-
 exports.reguser = (req,res)=>{
    const userInfo = req.body
-   if(!userInfo.userName||!userInfo.password){
-      return res.send({status:1,message:'用户名密码不正确'})
-   }
    // 定义sql语句
    const str = 'select * from ev_users where userName=?'
    db.query(str,userInfo.userName,(err,result)=>{

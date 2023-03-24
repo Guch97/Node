@@ -7,18 +7,24 @@ app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 
 
-app.use((req,res,next)=>{
-   res.cc = function(error,status=1){
+app.use((req, res, next) => {
+  res.cc = function (error, status = 1) {
     res.send({
       status,
-      message:error instanceof Error?error.message:err
+      message: error instanceof Error ? error.message : error
     })
   }
   next()
 })
+app.use((err, req, res, next) => {
+  if (err instanceof Joi.ValidationError) return res.cc(err)
+  // 未知错误
+  res.cc(err)
+})
 const useRouter = require('./router')
-app.use('/api',useRouter)
+const Joi = require('@hapi/joi')
+app.use('/api', useRouter)
 
- app.listen(3000,()=>{
-   console.log('>>>服务器启动了');
- })
+app.listen(3000, () => {
+  console.log('>>>服务器启动了');
+})
