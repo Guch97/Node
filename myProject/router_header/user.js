@@ -7,22 +7,18 @@ exports.reguser = (req,res)=>{
    }
    // 定义sql语句
    const str = 'select * from ev_users where userName=?'
-console.log('userInfo :>> ', userInfo); //xs
    db.query(str,userInfo.userName,(err,result)=>{
       console.log('err :>> ', err); //xs
       if(err){
-         return res.send({message:'发生未知错误',status:1})
+         return res.cc(err)
       }
       if(result.length>0){
-         return res.send({message:'已被占用用户名',status:1})
+         return res.cc('已被占用用户名')
       }
       const insertIntoStr = 'insert into ev_users set?'
       db.query(insertIntoStr,{userName:userInfo.userName,password:userInfo.password},(err,result)=>{
          if(err){
-            res.send({
-               status:1,
-               message:'插入失败'
-            })
+            return res.cc('插入失败')
          }else{
             res.send({
                status:200,
