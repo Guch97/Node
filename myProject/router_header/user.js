@@ -4,7 +4,6 @@ exports.reguser = (req,res)=>{
    // 定义sql语句
    const str = 'select * from ev_users where userName=?'
    db.query(str,userInfo.userName,(err,result)=>{
-      console.log('err :>> ', err); //xs
       if(err){
          return res.cc(err)
       }
@@ -26,8 +25,17 @@ exports.reguser = (req,res)=>{
 }
 
 exports.login = (req,res)=>{
-   res.send({
-      status:200,
-      message:'登陆成功'
+   const useInfo = req.body
+   const selectStr = 'select * from en_users where userName = ?'
+   db.query(selectStr,(err,result)=>{
+      if(err) return res.cc(err)
+      if(result.length!==1){
+         res.cc('无相关用户,登陆失败')
+      }else{
+         res.send({
+            status:200,
+            message:'登陆成功'
+         })
+      }
    })
 }

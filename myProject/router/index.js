@@ -5,6 +5,6 @@ const {loginSchema} = require('../schema/user')
 const router = express.Router()
 
 router.post('/reguser',expressjoi(loginSchema),use_hader.reguser)
-router.post('/login',use_hader.login)
+router.post('/login',expressjoi(loginSchema),use_hader.login)
 
 module.exports = router
