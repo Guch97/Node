@@ -1,14 +1,7 @@
-const Koa = require('koa')
 
+const app = require('./src/app')
 const { APP_PORT } = require('./src/config/default')
-const app = new Koa()
-const userRouter = require('./src/router/userRoute')
 
-
-
-
-
-app.use(userRouter.routes())
 
 
 app.listen(APP_PORT, () => {
