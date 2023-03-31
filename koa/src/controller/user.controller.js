@@ -1,11 +1,15 @@
 const { createUser } = require('../service/user.service')
 class UserController {
    async register (ctx, next) {
-      console.log('ctx.request.body :>> ', ctx.request.body); //xs
+      // console.log('ctx.request.body :>> ', ctx.request.body); //xs
       // 操作数据库
       const { userName, passWord } = ctx.request.body
-      const res = await createUser(userName, passWord)
-      console.log('res :>> ', res); //xs
+      try {
+         const res = await createUser(userName, passWord)
+         return res
+      } catch (error) {
+         console.log('error :>> ', error); //xs
+      }
       // 返回
       ctx.body = ctx.request.body
    }
