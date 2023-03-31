@@ -1,5 +1,5 @@
-const dotenv = require('dotenv')
+const dotenv = require("dotenv");
 
-dotenv.config()
+dotenv.config();
 
-module.exports = process.env
+module.exports = process.env;

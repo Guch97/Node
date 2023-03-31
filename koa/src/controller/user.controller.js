@@ -1,26 +1,30 @@
-const { createUser } = require('../service/user.service')
+/*
+ * @Author: xs
+ * @Date: 2023-03-31 10:53:07
+ */
+const { createUser } = require("../service/user.service");
+const { registerError } = require("../constant/error.type");
 class UserController {
-   async register (ctx, next) {
-      // 操作数据库
-      const { userName, passWord } = ctx.request.body
-      try {
-         const { dataValues } = await createUser(userName, passWord)
-         ctx.body = {
-            code: 0,
-            message: '注册成功',
-            result: {
-               id: dataValues.id,
-               user_name: dataValues.user_name
-            }
-         }
-      } catch (error) {
-         console.log('error :>> ', error); //xs
-      }
-   }
-   async login (ctx, next) {
-      ctx.body = '登陆成功'
-   }
+  async register(ctx, next) {
+    // 操作数据库
+    const { userName, passWord } = ctx.request.body;
+    try {
+      const { dataValues } = await createUser(userName, passWord);
+      ctx.body = {
+        code: 0,
+        message: "注册成功",
+        result: {
+          id: dataValues.id,
+          user_name: dataValues.user_name,
+        },
+      };
+    } catch (error) {
+      ctx.app.emit("error", registerError, ctx);
+    }
+  }
+  async login(ctx, next) {
+    ctx.body = "登陆成功";
+  }
 }
 
-
-module.exports = new UserController()
+module.exports = new UserController();
