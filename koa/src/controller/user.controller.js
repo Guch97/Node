@@ -5,24 +5,24 @@
 const { createUser } = require("../service/user.service");
 const { registerError } = require("../constant/error.type");
 class UserController {
-  async register(ctx, next) {
+  async register (ctx, next) {
     // 操作数据库
     const { userName, passWord } = ctx.request.body;
     try {
-      const { dataValues } = await createUser(userName, passWord);
+      const res = await createUser(userName, passWord);
       ctx.body = {
         code: 0,
         message: "注册成功",
         result: {
-          id: dataValues.id,
-          user_name: dataValues.user_name,
+          id: res.id,
+          user_name: res.user_name,
         },
       };
     } catch (error) {
       ctx.app.emit("error", registerError, ctx);
     }
   }
-  async login(ctx, next) {
+  async login (ctx, next) {
     ctx.body = "登陆成功";
   }
 }

@@ -4,13 +4,13 @@
  */
 const KoaRouter = require("koa-router");
 
-const { userValidator, verifyUser } = require("../middleware/user.middleware");
+const { userValidator, verifyUser, bcryptjsPassword } = require("../middleware/user.middleware");
 const router = new KoaRouter({ prefix: "/users" });
 
 const { register, login } = require("../controller/user.controller");
 
 // 注册接口
-router.post("/register", userValidator, verifyUser, register);
+router.post("/register", userValidator, verifyUser, bcryptjsPassword, register);
 router.post("/login", login);
 
 module.exports = router;
