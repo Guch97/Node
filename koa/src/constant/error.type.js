@@ -16,4 +16,12 @@ module.exports = {
     code: "10003",
     message: "用户注册错误",
   },
+  useNotAlreadyExited: {
+    code: "10004",
+    message: "用户名不存在",
+  },
+  invalidPassword: {
+    code: "10005",
+    message: "密码不正确",
+  },
 };

@@ -4,7 +4,7 @@
  */
 const User = require("../model/use.model");
 class UserService {
-  async createUser (user_name, pass_word) {
+  async createUser(user_name, pass_word) {
     // 写入数据库
     try {
       const res = await User.create({ user_name, pass_word });
@@ -13,13 +13,13 @@ class UserService {
       console.log("error :>> ", error); //xs
     }
   }
-  async getUserInfo ({ id, user_name, pass_word, is_admin }) {
-    const whereOpt = {};
-    id && { ...whereOpt, id };
-    user_name && { ...whereOpt, user_name };
-    pass_word && { ...whereOpt, pass_word };
-    is_admin && { ...whereOpt, is_admin };
-    const res = User.findOne({
+  async getUserInfo({ id, user_name, pass_word, is_admin }) {
+    let whereOpt = {};
+    whereOpt = id && { ...whereOpt, id };
+    whereOpt = pass_word && { ...whereOpt, pass_word };
+    whereOpt = is_admin && { ...whereOpt, is_admin };
+    whereOpt = user_name && { ...whereOpt, user_name };
+    const res = await User.findOne({
       attributes: ["id", "user_name", "pass_word", "is_admin"],
       where: whereOpt,
     });

@@ -5,7 +5,7 @@
 const { createUser } = require("../service/user.service");
 const { registerError } = require("../constant/error.type");
 class UserController {
-  async register (ctx, next) {
+  async register(ctx, next) {
     // 操作数据库
     const { userName, passWord } = ctx.request.body;
     try {
@@ -22,7 +22,8 @@ class UserController {
       ctx.app.emit("error", registerError, ctx);
     }
   }
-  async login (ctx, next) {
+  async login(ctx, next) {
+    const { userName, passWord } = ctx.request.body;
     ctx.body = "登陆成功";
   }
 }
