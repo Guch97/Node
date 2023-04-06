@@ -10,6 +10,7 @@ const {
   bcryptjsPassword,
   verifyLogin,
 } = require("../middleware/user.middleware");
+const { auth } = require("../middleware/auth");
 const router = new KoaRouter({ prefix: "/users" });
 
 const { register, login } = require("../controller/user.controller");
@@ -17,5 +18,8 @@ const { register, login } = require("../controller/user.controller");
 // 注册接口
 router.post("/register", userValidator, verifyUser, bcryptjsPassword, register);
 router.post("/login", userValidator, verifyLogin, login);
+router.patch("/", auth, (ctx, next) => {
+  ctx.body = "修改成功";
+});
 
 module.exports = router;
