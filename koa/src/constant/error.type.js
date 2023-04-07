@@ -38,4 +38,14 @@ module.exports = {
     message: "无效的token",
     result: "",
   },
+  hasNotPermission: {
+    code: "10008",
+    message: "没有有管理员的权限",
+    result: "",
+  },
+  fileUploadError: {
+    code: "10009",
+    message: "文件上传错误",
+    result: "",
+  },
 };

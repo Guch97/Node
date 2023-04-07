@@ -13,9 +13,9 @@ const { JWT_SECRET } = require("../config/default");
 class UserController {
   async register(ctx, next) {
     // 操作数据库
-    const { userName, passWord } = ctx.request.body;
+    const { userName, passWord, isAdmin } = ctx.request.body;
     try {
-      const res = await createUser(userName, passWord);
+      const res = await createUser(userName, passWord, isAdmin);
       ctx.body = {
         code: 0,
         message: "注册成功",

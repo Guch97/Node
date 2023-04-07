@@ -7,9 +7,10 @@ const { JWT_SECRET } = require("../config/default");
 const {
   tokenExpiredError,
   invalidTokenError,
+  hasNotPermission,
 } = require("../constant/error.type");
 const auth = async (ctx, next) => {
-  const { authorization } = ctx.request.header;
+  const { authorization = "" } = ctx.request.header;
   const token = authorization.split(" ")[1];
   try {
     //   包含playload信息
@@ -30,6 +31,16 @@ const auth = async (ctx, next) => {
   await next();
 };
 
+const handPermission = async (ctx, next) => {
+  const { is_admin } = ctx.state.user;
+  if (!is_admin) {
+    console.error("无用户");
+    return ctx.app.emt("error", hasNotPermission, ctx);
+  }
+  await next();
+};
+
 module.exports = {
   auth,
+  handPermission,
 };
