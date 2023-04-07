@@ -10,13 +10,13 @@ const {
 } = require("../constant/error.type");
 const auth = async (ctx, next) => {
   const { authorization } = ctx.request.header;
-  const token = authorization.replace("Bearer", "");
-  console.log("token :>> ", token); //xs
+  const token = authorization.split(" ")[1];
   try {
     //   包含playload信息
     const user = jwt.verify(token, JWT_SECRET);
     ctx.state.user = user;
   } catch (error) {
+    console.log("error :>> ", error); //xs
     switch (error.name) {
       case "TokenExpiredError":
         return ctx.app.emit("error", tokenExpiredError, ctx);

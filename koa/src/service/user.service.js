@@ -25,6 +25,20 @@ class UserService {
     });
     return res ? res.dataValues : null;
   }
+  async updatePassWord({ id, pass_word, user_name, is_admin }) {
+    let whereOpt = { id };
+    let newUser = {};
+    user_name && Object.assign(newUser, { user_name });
+    is_admin && Object.assign(newUser, { is_admin });
+    pass_word && Object.assign(newUser, { pass_word });
+
+    console.log("newUser :>> ", newUser); //xs
+    const res = await User.update(newUser, {
+      where: whereOpt,
+    });
+    console.log(res, "22222");
+    return res && res[0] === 1;
+  }
 }
 
 module.exports = new UserService();

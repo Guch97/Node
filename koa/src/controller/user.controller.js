@@ -2,7 +2,11 @@
  * @Author: xs
  * @Date: 2023-03-31 10:53:07
  */
-const { createUser, getUserInfo } = require("../service/user.service");
+const {
+  createUser,
+  getUserInfo,
+  updatePassWord,
+} = require("../service/user.service");
 const { registerError } = require("../constant/error.type");
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = require("../config/default");
@@ -41,6 +45,30 @@ class UserController {
         },
       };
     } catch {}
+  }
+  async changePassWord(ctx, next) {
+    const { id } = ctx.state.user;
+    console.log(id);
+    const passWord = ctx.request.body.passWord;
+    console.log(passWord);
+
+    const res = await updatePassWord({ id, pass_word: passWord });
+    if (res) {
+      ctx.body = {
+        code: 0,
+        message: "修改密码成功",
+        result: "",
+      };
+    } else {
+      ctx.body = {
+        code: "10007",
+        message: "修改密码失败",
+        result: "",
+      };
+    }
+    console.log(res, "res");
+    try {
+    } catch (error) {}
   }
 }
 
