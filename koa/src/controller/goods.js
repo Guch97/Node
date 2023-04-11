@@ -5,9 +5,8 @@
 const path = require("path");
 const { fileUploadError } = require("../constant/error.type");
 class GoodsController {
-  async upload(ctx, next) {
+  async upload(ctx) {
     const { file } = ctx.request.files;
-    console.log("file :>> ", file); //xs
     if (file) {
       ctx.body = {
         code: "0",
@@ -19,6 +18,10 @@ class GoodsController {
     } else {
       ctx.app.emit("error", fileUploadError, ctx);
     }
+  }
+  async create(ctx) {
+    // 直接调用service
+    await createGoods(ctx.request.body);
   }
 }
 
